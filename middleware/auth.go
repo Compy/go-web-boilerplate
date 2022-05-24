@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"go-web-boilerplate/auth"
-	"log"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,7 +9,6 @@ import (
 func Auth() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		tokenString := context.GetHeader("Authorization")
-		log.Printf("Got %s", tokenString)
 		if tokenString == "" {
 			context.JSON(401, gin.H{"error": "request does not contain an access token"})
 			context.Abort()

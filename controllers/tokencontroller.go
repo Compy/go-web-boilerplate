@@ -25,13 +25,13 @@ func GenerateToken(context *gin.Context) {
 	// check if email exists and password is correct
 	record := database.Instance.Where("email = ?", request.Email).First(&user)
 	if record.Error != nil {
-		context.JSON(http.StatusInternalServerError, gin.H{"error": record.Error.Error()})
+		context.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
 		context.Abort()
 		return
 	}
 	credentialError := user.CheckPassword(request.Password)
 	if credentialError != nil {
-		context.JSON(http.StatusUnauthorized, gin.H{"error": "invalid credentials"})
+		context.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
 		context.Abort()
 		return
 	}

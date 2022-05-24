@@ -4,12 +4,14 @@ import (
 	"go-web-boilerplate/controllers"
 	"go-web-boilerplate/middleware"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 )
 
 func initRouter() *gin.Engine {
 	router := gin.Default()
+	router.Use(cors.Default())
 	api := router.Group("/api")
 	{
 		api.POST("/token", controllers.GenerateToken)

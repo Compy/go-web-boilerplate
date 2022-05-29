@@ -1,3 +1,5 @@
+// This package is responsible for providing helper functions for generating and validating JWTs
+
 package auth
 
 import (
